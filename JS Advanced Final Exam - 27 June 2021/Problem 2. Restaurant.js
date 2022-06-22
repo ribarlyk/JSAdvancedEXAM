@@ -72,6 +72,7 @@ return `Great idea! Now with the ${meal} we have ${kvp.length} meals in the menu
          for(let line of this.menu[meal].products){
            
           if(this.stockProducts[line[0]] >= line[1] ){
+            this.budgetMoney += this.menu[meal].price;
           return  `Your order (${meal}) will be completed in the next 30 minutes and will cost you ${this.menu[meal].price}.`
           } else{
             return `For the time being, we cannot complete your order (${meal}), we are very sorry...`

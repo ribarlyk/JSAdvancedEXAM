@@ -61,7 +61,7 @@ function solution() {
     });
 
     continueBtn.addEventListener("click", () => {
-      divBlock.innerHTML = "<h3>Thank You For Your Reservation!</h3>";
+      divBlock.innerHTML = "<h3>Thank you for your reservation!</h3>";
     });
 
     subBtn.disabled = true;
