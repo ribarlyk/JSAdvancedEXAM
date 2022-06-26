@@ -3,8 +3,7 @@ class CarDealership {
     (this.name = name),
       (this.availableCars = []),
       (this.soldCars = []),
-      (this.totalIncome = 0)
-     
+      (this.totalIncome = 0);
   }
   addCar(model, horsepower, price, mileage) {
     if (model == "" || horsepower < 0 || price < 0 || mileage < 0) {
@@ -35,19 +34,20 @@ class CarDealership {
     return `${model} was sold for ${soldPrice.toFixed(2)}$`;
   }
   currentCar() {
-    if(this.availableCars.length === 0){
-        return 'There are no available cars'
-    }else{
-    let header = `-Available cars:\n`;
-    return (header += this.availableCars
-      .map(
-        (el) =>
-          `---${el.model} - ${el.horsepower} HP - ${el.mileage.toFixed(
-            2
-          )} km - ${el.price.toFixed(2)}$`
-      )
-      .join("\n"));
-  }}
+    if (this.availableCars.length === 0) {
+      return "There are no available cars";
+    } else {
+      let header = `-Available cars:\n`;
+      return (header += this.availableCars
+        .map(
+          (el) =>
+            `---${el.model} - ${el.horsepower} HP - ${el.mileage.toFixed(
+              2
+            )} km - ${el.price.toFixed(2)}$`
+        )
+        .join("\n"));
+    }
+  }
 
   salesReport(criteria) {
     if (criteria != "horsepower" && criteria != "model") {
@@ -76,6 +76,6 @@ dealership.addCar("Mercedes C63", 300, 29000, 187000);
 dealership.addCar("Audi A3", 120, 4900, 240000);
 dealership.sellCar("Toyota Corolla", 230000);
 dealership.sellCar("Mercedes C63", 110000);
-dealership.sellCar("Audi A3", 120,)
+dealership.sellCar("Audi A3", 120);
 
 console.log(dealership.salesReport("horsepower"));

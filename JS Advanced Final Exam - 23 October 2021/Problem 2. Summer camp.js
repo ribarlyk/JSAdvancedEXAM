@@ -34,24 +34,50 @@ class SummerCamp {
     }
   }
   timeToPlay(typeOfGame, participant1, participant2) {
-  
-    if (typeOfGame === 'WaterBalloonFights') {
-        let targetNameOne = this.listOfParticipants.find(el=>el['name']=== participant1);
-        let targetNameTwo = this.listOfParticipants.find(el=>el['name']=== participant2);
-    if(targetNameOne === undefined ||  targetNameTwo === undefined){
-    throw new Error('Invalid entered name/s.')
-    }
-    }else if('Battleship'){
-        let targetNameOne = this.listOfParticipants.find(el=>el['name'] === participant1);
-       
-    if(!targetNameOne){
-    throw new Error('Invalid entered name/s.')
-    }
+    if (typeOfGame === "WaterBalloonFights") {
+      let targetNameOne = this.listOfParticipants.find(
+        (el) => el["name"] === participant1
+      );
+      let targetNameTwo = this.listOfParticipants.find(
+        (el) => el["name"] === participant2
+      );
+
+      if (targetNameOne === undefined || targetNameTwo === undefined) {
+        throw new Error("Invalid entered name/s.");
+      }
+      if (targetNameOne["condition"] != targetNameTwo["condition"]) {
+        throw new Error(`Choose players with equal condition.`);
+      }
+      if (targetNameOne.power > targetNameTwo.power) {
+        targetNameOne.wins += 1;
+        return `The ${participant1} is winner in the game ${typeOfGame}.`;
+      } else if (targetNameOne.power < targetNameTwo.power) {
+        targetNameTwo.wins += 1;
+        return `The ${participant2} is winner in the game ${typeOfGame}.`;
+      } else {
+        return `There is no winner.`;
+      }
+    } else if ("Battleship") {
+      let targetNameOne = this.listOfParticipants.find(
+        (el) => el["name"] === participant1
+      );
+
+      if (!targetNameOne) {
+        throw new Error("Invalid entered name/s.");
+      } else {
+        targetNameOne.power += 20;
+        return `The ${participant1} successfully completed the game ${typeOfGame}.`;
+      }
     }
   }
+  toString() {
+    let header = `Jane Austen will take ${this.listOfParticipants.length} participants on camping to Pancharevo Sofia 1137, Bulgaria\n`;
+    this.listOfParticipants.sort((a, b) => b.wins - a.wins);
+    return (header += this.listOfParticipants
+      .map((el) => `${el.name} - ${el.condition} - ${el.power} - ${el.wins}`)
+      .join("\n"));
+  }
 }
-
-
 
 const summerCamp = new SummerCamp(
   "Jane Austen",
@@ -60,13 +86,7 @@ const summerCamp = new SummerCamp(
 console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
 console.log(summerCamp.timeToPlay("Battleship", "Petar Petarson"));
 console.log(summerCamp.registerParticipant("Sara Dickinson", "child", 200));
-console.log(
-  summerCamp.timeToPlay(
-    "WaterBalloonFights",
-    "Petar Petarson",
-    "Sara Dickinson"
-  )
-);
+
 console.log(summerCamp.registerParticipant("Dimitur Kostov", "student", 300));
 console.log(
   summerCamp.timeToPlay(
@@ -75,3 +95,5 @@ console.log(
     "Dimitur Kostov"
   )
 );
+
+console.log(summerCamp.toString());
